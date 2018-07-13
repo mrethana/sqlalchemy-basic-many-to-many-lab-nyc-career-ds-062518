@@ -15,9 +15,9 @@ class TestBasicHasManyThrough(unittest.TestCase):
     def test_actors_have_many_roles(self):
         bale = session.query(Actor).filter_by(name="Christian Bale").one()
         self.assertEqual(len(bale.roles), 3)
-        self.assertEqual(bale.roles[0].character, 'Dr. Michael Burry')
-        self.assertEqual(bale.roles[1].character, 'Patrick Bateman')
-        self.assertEqual(bale.roles[2].character, 'Batman')
+        self.assertEqual(bale.roles[0].character, 'Batman')
+        self.assertEqual(bale.roles[1].character, 'Dr. Michael Burry')
+        self.assertEqual(bale.roles[2].character, 'Patrick Bateman')
 
     def test_roles_have_many_actors(self):
         catwoman = session.query(Role).filter_by(character="Catwoman").one()
@@ -32,7 +32,7 @@ class TestBasicHasManyThrough(unittest.TestCase):
         characters = []
         for role in roles:
             characters.append(role.character)
-        self.assertEqual(characters, ['Dr. Michael Burry', 'Patrick Bateman', 'Batman'])
+        self.assertEqual(characters, ['Batman','Dr. Michael Burry', 'Patrick Bateman'])
 
     def test_return_catwoman_actors(self):
         actors = return_catwoman_actors(session)
@@ -41,7 +41,7 @@ class TestBasicHasManyThrough(unittest.TestCase):
         names = []
         for actor in actors:
             names.append(actor.name)
-        self.assertEqual(names, ['Michelle Pfeiffer', 'Anne Hathaway'])
+        self.assertEqual(names, ['Anne Hathaway', 'Michelle Pfeiffer'])
 
     def test_return_number_of_batman_actors(self):
         result = return_number_of_batman_actors(session)
